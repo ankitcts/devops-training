@@ -1,0 +1,16 @@
+name: creating ec2 instance
+hosts: localhost
+tasks:
+  - name: creating ec2 instance
+    amazon.aws.ec2_instance:
+      key_name: my-key
+      instance_type: t2.micro
+      image_id: ami-0abcdef1234567890
+      wait: yes
+      region: us-east-1
+      count: 1
+    register: ec2
+
+  - name: output instance information
+    debug:
+      var: ec2.instances
